@@ -1,0 +1,16 @@
+{
+  "$schema": "./node_modules/midi-mixer-plugin/plugin.schema.json",
+  "id": "com.midi-mixer.template",
+  "name": "Template Plugin",
+  "type": "node",
+  "version": "1.0.1",
+  "author": "MIDI Mixer",
+  "main": "lib/main.js",
+  "settings": {
+    "text": {
+      "label": "A text field",
+      "type": "text",
+      "required": false
+    }
+  }
+}
