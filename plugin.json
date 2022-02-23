@@ -1,16 +1,55 @@
 {
   "$schema": "./node_modules/midi-mixer-plugin/plugin.schema.json",
-  "id": "com.midi-mixer.template",
-  "name": "Template Plugin",
+  "id": "com.theo.midi-mixer.mqtt",
+  "name": "MQTT Plugin",
   "type": "node",
-  "version": "1.0.1",
-  "author": "MIDI Mixer",
+  "version": "1.0.0-alpha.1",
+  "author": "Theo",
   "main": "lib/main.js",
   "settings": {
-    "text": {
-      "label": "A text field",
+    "host": {
+      "label": "Broker URL:Port (ex. mqtt://homeassistant.local:1883)",
       "type": "text",
-      "required": false
+      "required": true
+    },
+    "user": {
+      "label": "Broker Username",
+      "type": "text",
+      "required": true
+    },
+    "password": {
+      "label": "Broker Password",
+      "type": "password",
+      "required": true
+    },
+    "HADiscovery": {
+      "label": "Disable Home Assistant Discovery",
+      "type": "text",
+      "fallback": "Enabled"
+    },
+    "deviceID": {
+      "label": "Unique ID for The Device (Home Assistant Device ID)",
+      "type": "text",
+      "required": true
+    },
+    "assignmentCount": {
+      "label": "Number of Groups to Create",
+      "type": "text",
+      "required": true
+    },
+    "buttonCount": {
+      "label": "Number of Buttons to create",
+      "type": "text",
+      "required": true
+    },
+    "status": {
+      "label": "Status",
+      "type": "status",
+      "fallback": "Disconnected"
+    },
+    "resetHA": {
+      "label": "Remove All Home Assistant Devices (Warning: May Break Home Assistant Stuff)",
+      "type": "button"
     }
   }
 }
