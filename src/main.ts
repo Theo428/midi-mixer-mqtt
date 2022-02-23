@@ -243,6 +243,8 @@ const connect = async () => {
   buttonCount = settings.buttonCount as string;
   deviceID = settings.deviceID as string;
 
+  if(!deviceID) deviceID = "midi-mixer";
+
   const connectionOptions = {
     clean: true,
     connectTimeout: 4000,
@@ -252,8 +254,6 @@ const connect = async () => {
 
   $MM.setSettingsStatus("status", "Connecting...");
   client = mqtt.connect(host, connectionOptions);
-
-  console.log(settings);
 
   client.on('connect', function () {
     $MM.setSettingsStatus("status", "Connected")
@@ -267,6 +267,7 @@ const connect = async () => {
 
   client.on('error', (err) => {
     console.log('error', err);
+    log.error(err);
     client.end()
     $MM.setSettingsStatus("status", "Connection Error.");
   });
