@@ -8,7 +8,7 @@
   "main": "lib/main.js",
   "settings": {
     "host": {
-      "label": "Broker URL:Port (ex. \"mqtt://homeassistant.local:1883\")",
+      "label": "Broker URL:Port (ex. mqtt://homeassistant.local:1883)",
       "type": "text",
       "required": true
     },
