@@ -1,7 +1,7 @@
 {
-  "name": "com.midi-mixer.template",
+  "name": "com.midi-mixer.mqtt",
   "version": "1.0.0",
-  "description": "A template plugin for MIDI Mixer that demonstrates how to interact with MIDI Mixer's API.",
+  "description": "A plugin built to enable MQTT comunication for controlling Home Assistant/other smart home devices.",
   "main": "lib/main.js",
   "directories": {
     "lib": "lib"
