@@ -26,7 +26,8 @@
     "mqtt": "^4.3.6"
   },
   "bundledDependencies": [
-    "midi-mixer-plugin"
+    "midi-mixer-plugin",
+    "mqtt"
   ],
   "devDependencies": {
     "midi-mixer-cli": "^1.0.3",
