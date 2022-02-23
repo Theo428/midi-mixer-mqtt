@@ -1,6 +1,6 @@
 {
   "name": "com.midi-mixer.template",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "A template plugin for MIDI Mixer that demonstrates how to interact with MIDI Mixer's API.",
   "main": "lib/main.js",
   "directories": {
