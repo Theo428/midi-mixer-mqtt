@@ -1,43 +1,78 @@
-# Template Plugin
+# MQTT Plugin
 
-This is a template plugin that demonstrates how to interact with MIDI Mixer's API in order to register buttons and groups, as well as provide a good user experience for your users.
+A plugin built to enable MQTT comunication for controlling Home Assistant/other smart home devices.
 
-This file is a `PAGE.md` file specified in the plugin's folder, and is simply a rendered markdown file. This can include a huge variety of formatting and is great for letting your users know how to use the plugin you've developed.
+## Getting Started 
 
-## Examples
-
-For code examples of how to interact with MIDI Mixer, check out the `src` directory in the plugin itself.
+0. I am assuming that you already have an MQTT broker setup if not instrucation for setting it up in Home Assistant can be found [here](https://github.com/home-assistant/addons/blob/master/mosquitto/DOCS.md).
+1. Install the plugin with the latest release from the [releases](https://github.com/Theo428/midi-mixer-mqtt/releases) page on github.
+2. Fill in the [settings](#settings) page in midi-mixer
+3. Start the plugin and hope for the best.
+4. Configure Home Assistant or other MQTT home automation service you want to use.
 
 ## Settings
 
-One of the crucial parts of developing a plugin (and something not documented directly in code) is the JSON definition of settings. Notarised using TypeScript, the `settings` key in your `package.json` file can be described like so:
+#### Broker URL:Port
+This is the ip/url and port of the MQTT broker that you are using. Be sure to include the `mqtt://` in the beginning to ensure it finds the host.
 
-```ts
-interface PluginSetting {
-  /**
-   * The label for the field to be shown in the plugin's settings page.
-   */
-  label: string;
+#### Broker Username
+The username of the MQTT broker that you want to use. (If there is no authentication presumably you can leave this blank but I haven't tested it yet.)
 
-  /**
-   * If marked as `true`, this field will be marked as required in the user's
-   * UI.
-   */
-  required?: boolean;
+#### Broker Password
+The password for the MQTT broker that you want to use. (If there is no authentication presumably you can leave this blank but I haven't tested it yet.)
 
-  /**
-   * The input type for this setting.
-   */
-  type: "text" | "password" | "status" | "button";
+#### Diable Home Assistant Discovery
+Populating this will stop the plugin from sending out the Home Assistant auto-discovery config if you would prefer to [maunally confiure](#mqtt-topics) it or are not using home assistant.
 
-  /**
-   * If no input has been given by either the user or the plugin, you can
-   * provide an optional string for the value to fall back to.
-   */
-  fallback?: string;
-}
+#### Unique ID
+This is a unique identifier that will be used to idetify different devices if there are multiple on the network. (defaults to `midi-mixer` if left blank)
 
-type PluginSettings = Record<string, PluginSetting>;
-```
+#### Number of Groups to Create
+This is the number of groups that the plugin will create to prevent from clogging the group list too badly.
+
+#### Number of Buttons to Create
+This is the number of buttons that the plugin will create to prevent from clogging the button list too badly. (WIP)
+
+#### Remove All Home Assistant Devices
+This button will set all entity configurations to NULL thus removing the device and all entities from home assistant. Be Careful!
 
 
+## Home Assistant Notes
+
+- Faders show up as generic sensors with values from 0-100
+- Buttons show up as automation triggers
+- Indicators show up as lights. Volume and Peak indcators are dimmable.
+
+
+## MQTT Topics
+These are the topics that each button, Fader, or Indicator are sending/receiving messages on.
+
+**Availability Topic:** `midi-mixer/{deviceID}/state`
+
+### Faders
+**State Topic:** `midi-mixer/{deviceID}/Fader{Fader Number}`  
+**Command Topic:** `N/A`
+
+### Assign Buttons
+**State Topic:** `midi-mixer/{deviceID}/Fader{Fader Number}AssignButton`  
+**Command Topic:** `N/A`
+
+### Mute Buttons
+**State Topic:** `midi-mixer/{deviceID}/Fader{Fader Number}MuteButton`  
+**Command Topic:** `N/A`
+
+### Assign Indicator
+**State Topic:** `midi-mixer/{deviceID}/Fader{Fader Number}AssignIndicator`  
+**Command Topic:** `midi-mixer/{deviceID}/Fader{Fader Number}AssignIndicator/set`  
+
+### Mute Indicator
+**State Topic:** `midi-mixer/{deviceID}/Fader{Fader Number}MuteIndicator`  
+**Command Topic:** `midi-mixer/{deviceID}/Fader{Fader Number}MuteIndicator/set`  
+
+### Peak Indicator
+**State Topic:** `midi-mixer/{deviceID}/Fader{Fader Number}PeakIndicator`  
+**Command Topic:** `midi-mixer/{deviceID}/Fader{Fader Number}PeakIndicator/set`  
+
+### Volume Indicator
+**State Topic:** `midi-mixer/{deviceID}/Fader{Fader Number}VolumeIndicator`  
+**Command Topic:** `midi-mixer/{deviceID}/Fader{Fader Number}VolumeIndicator/set`  
