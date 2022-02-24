@@ -1,7 +1,7 @@
 {
-  "name": "com.midi-mixer.template",
+  "name": "com.theo.midi-mixer.mqtt",
   "version": "1.0.1",
-  "description": "A template plugin for MIDI Mixer that demonstrates how to interact with MIDI Mixer's API.",
+  "description": "A plugin built to enable MQTT comunication for controlling Home Assistant/other smart home devices.",
   "main": "lib/main.js",
   "directories": {
     "lib": "lib"
@@ -26,7 +26,8 @@
     "mqtt": "^4.3.6"
   },
   "bundledDependencies": [
-    "midi-mixer-plugin"
+    "midi-mixer-plugin",
+    "mqtt"
   ],
   "devDependencies": {
     "midi-mixer-cli": "^1.0.3",
