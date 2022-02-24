@@ -28,7 +28,7 @@
       "fallback": "Enabled"
     },
     "deviceID": {
-      "label": "Unique ID for The Device (Home Assistant Device ID)",
+      "label": "Device ID for The Device (Home Assistant Device ID)",
       "type": "text",
       "required": true
     },
