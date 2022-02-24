@@ -3,7 +3,7 @@
   "id": "com.theo.midi-mixer.mqtt",
   "name": "MQTT Plugin",
   "type": "node",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "author": "Theo",
   "main": "lib/main.js",
   "settings": {
@@ -28,7 +28,7 @@
       "fallback": "Enabled"
     },
     "deviceID": {
-      "label": "Unique ID for The Device (Home Assistant Device ID)",
+      "label": "Device ID for The Device (Home Assistant Device ID)",
       "type": "text",
       "required": true
     },

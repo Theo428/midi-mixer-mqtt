@@ -24,7 +24,7 @@ The password for the MQTT broker that you want to use. (If there is no authentic
 #### Diable Home Assistant Discovery
 Populating this will stop the plugin from sending out the Home Assistant auto-discovery config if you would prefer to [maunally confiure](#mqtt-topics) it or are not using home assistant.
 
-#### Unique ID
+#### Device ID
 This is a unique identifier that will be used to idetify different devices if there are multiple on the network. (defaults to `midi-mixer` if left blank)
 
 #### Number of Groups to Create
@@ -42,6 +42,27 @@ This button will set all entity configurations to NULL thus removing the device 
 - Faders show up as generic sensors with values from 0-100
 - Buttons show up as automation triggers
 - Indicators show up as lights. Volume and Peak indcators are dimmable.
+
+### Home Assistant Button Example
+This is what a sample Automation Trigger from a button may look like in Home Assistant. `midi-mixer` will be the Device ID and under the `Trigger` Section there should be a dropdown list of triggers that will activate the automation.
+![Home Assistant Automation Example](README/HA_Automation_Trigger.png)
+
+### Home Assistant Fader Example
+Here is an example yaml configuration for setting the brightness of a light using a fader. 
+```yaml
+alias: New Automation
+description: ''
+mode: single
+trigger:
+  - platform: state
+    entity_id: sensor.midi_mixer_fader0 #replace midi_mixer_fader0 with the entity id of the Fader you want
+condition: []
+action:
+  - service: light.turn_on
+    entity_id: light.your_light_name_here
+    data_template:
+      brightness: "{{ states.sensor.midi_mixer_fader0.state|int }}" #replace midi_mixer_fader0 with the entity id of the Fader you want
+```
 
 
 ## MQTT Topics
@@ -76,3 +97,7 @@ These are the topics that each button, Fader, or Indicator are sending/receiving
 ### Volume Indicator
 **State Topic:** `midi-mixer/{deviceID}/Fader{Fader Number}VolumeIndicator`  
 **Command Topic:** `midi-mixer/{deviceID}/Fader{Fader Number}VolumeIndicator/set`  
+
+### Button
+**State Topic:** `midi-mixer/{deviceID}/Button{Button Number}`  
+**Command Topic:** `midi-mixer/{deviceID}/Button{Button Number}/set`  
