@@ -276,7 +276,7 @@ const connect = async () => {
 
   client.on('connect', function () {
     $MM.setSettingsStatus("status", "Connected")
-    if (!HADiscovery) PublishHADiscovery(deviceID, parseInt(assignmentCount, 10), parseInt(buttonCount, 10));
+    if (!HADiscovery || HADiscovery == "Enabled") PublishHADiscovery(deviceID, parseInt(assignmentCount, 10), parseInt(buttonCount, 10));
     updateAvailabilityTopic(true);
     clearTimeout(reconnectTimeout);
   });
