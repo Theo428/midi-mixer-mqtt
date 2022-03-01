@@ -113,11 +113,6 @@ function PublishHADiscovery(deviceID:string, assignmentCount:number, buttonCount
   for(let i = 0; i < assignmentCount; i++)
   {
     let faderName = "Fader" + i;
-    
-
-    assignments[i] = new Assignment(faderName, {
-      name: "MQTT " + faderName,
-    });
 
     assignments[i].on("volumeChanged", (level: number) => {
       client.publish(stateTopic(deviceID, faderName), (level * 255).toString());
@@ -155,10 +150,6 @@ function PublishHADiscovery(deviceID:string, assignmentCount:number, buttonCount
   {
     let buttonName = "Button" + i;
     client.publish(buttonTriggerDiscoveryTopic(deviceID, buttonName), ButtonHAConfig(deviceID, buttonName));
-
-    buttons[i] = new ButtonType(buttonName, {
-      name: "MQTT " + buttonName,
-    });
 
     buttons[i].on("pressed", () => {
       client.publish(stateTopic(deviceID, buttonName), "trigger");
@@ -271,12 +262,27 @@ const connect = async () => {
   connectionOptions.username = user;
   connectionOptions.password = password;
 
+  for(let i = 0; i < parseInt(assignmentCount, 10); i++)
+  {
+    assignments[i] = new Assignment("Fader" + i, {
+      name: "MQTT Fader" + i,
+    });
+  }
+
+  for(let i = 0; i < parseInt(buttonCount, 10); i++) {
+
+    buttons[i] = new ButtonType("Button" + i, {
+      name: "MQTT Button" + i,
+    });
+  }
+
+
   $MM.setSettingsStatus("status", "Connecting...");
   client = mqtt.connect(host, connectionOptions);
 
   client.on('connect', function () {
     $MM.setSettingsStatus("status", "Connected")
-    if (!HADiscovery) PublishHADiscovery(deviceID, parseInt(assignmentCount, 10), parseInt(buttonCount, 10));
+    if (!HADiscovery || HADiscovery == "Enabled") PublishHADiscovery(deviceID, parseInt(assignmentCount, 10), parseInt(buttonCount, 10));
     updateAvailabilityTopic(true);
     clearTimeout(reconnectTimeout);
   });
