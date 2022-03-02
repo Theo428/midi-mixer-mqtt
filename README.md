@@ -37,8 +37,3 @@ This is the number of buttons that the plugin will create to prevent from cloggi
 
 #### Remove All Home Assistant Devices
 This button will set all entity configurations to NULL thus removing the device and all entities from home assistant. Be Careful!
-
-
-### Home Assistant Button Example
-This is what a sample Automation Trigger from a button may look like in Home Assistant. `midi-mixer` will be the Device ID and under the `Trigger` Section there should be a dropdown list of triggers that will activate the automation.
-![Home Assistant Automation Example](README/HA_Automation_Trigger.png)
