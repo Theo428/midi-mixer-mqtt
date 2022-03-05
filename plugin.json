@@ -9,18 +9,18 @@
   "settings": {
     "host": {
       "label": "Broker URL:Port (ex. mqtt://homeassistant.local:1883)",
-      "type": "text",
-      "required": true
+      "required": true,
+      "type": "text"
     },
     "user": {
       "label": "Broker Username",
-      "type": "text",
-      "required": true
+      "required": true,
+      "type": "text"
     },
     "password": {
       "label": "Broker Password",
-      "type": "password",
-      "required": true
+      "required": true,
+      "type": "password"
     },
     "HADiscovery": {
       "label": "Disable Home Assistant Discovery",
@@ -28,8 +28,8 @@
     },
     "deviceID": {
       "label": "Device ID for The Device (Home Assistant Device ID)",
-      "type": "text",
-      "required": true
+      "required": true,
+      "type": "text"
     },
     "assignmentCount": {
       "label": "Number of Groups to Create",
