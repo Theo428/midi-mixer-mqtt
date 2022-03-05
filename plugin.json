@@ -3,44 +3,45 @@
   "id": "com.theo.midi-mixer.mqtt",
   "name": "MQTT Plugin",
   "type": "node",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "author": "Theo",
   "main": "lib/main.js",
   "settings": {
     "host": {
       "label": "Broker URL:Port (ex. mqtt://homeassistant.local:1883)",
-      "type": "text",
-      "required": true
+      "required": true,
+      "type": "text"
     },
     "user": {
       "label": "Broker Username",
-      "type": "text",
-      "required": true
+      "required": true,
+      "type": "text"
     },
     "password": {
       "label": "Broker Password",
-      "type": "password",
-      "required": true
+      "required": true,
+      "type": "password"
     },
     "HADiscovery": {
       "label": "Disable Home Assistant Discovery",
-      "type": "text",
-      "fallback": "Enabled"
+      "type": "toggle"
     },
     "deviceID": {
       "label": "Device ID for The Device (Home Assistant Device ID)",
-      "type": "text",
-      "required": true
+      "required": true,
+      "type": "text"
     },
     "assignmentCount": {
       "label": "Number of Groups to Create",
-      "type": "text",
-      "required": true
+      "type": "integer",
+      "min": 0,
+      "max": 50
     },
     "buttonCount": {
       "label": "Number of Buttons to create",
-      "type": "text",
-      "required": true
+      "type": "integer",
+      "min": 0,
+      "max": 50
     },
     "status": {
       "label": "Status",

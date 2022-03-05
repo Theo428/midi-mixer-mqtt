@@ -8,8 +8,8 @@ let assignments: Assignment[] = [];
 let buttons: ButtonType[] = [];
 
 let deviceID = "";
-let assignmentCount = "";
-let buttonCount = "";
+let assignmentCount = 0;
+let buttonCount = 0;
 
 let connectionOptions = {
   clean: true,
@@ -160,7 +160,7 @@ function PublishHADiscovery(deviceID:string, assignmentCount:number, buttonCount
 
 const ClearHADevices = async ()  => {
   console.log("Clearing Home Assistant Discovery...");
-  for(let i = 0; i < parseInt(assignmentCount, 10); i++)
+  for(let i = 0; i < assignmentCount; i++)
   {
     let faderName = "Fader" + i;
     client.publish(sensorDiscoveryTopic(deviceID, faderName), "");
@@ -176,7 +176,7 @@ const ClearHADevices = async ()  => {
     client.publish(lightDiscoveryTopic(deviceID, faderName + "VolumeIndicator"), ""); //Volume Indicator
   }
 
-  for(let i = 0; i < parseInt(buttonCount, 10); i++)
+  for(let i = 0; i < buttonCount; i++)
   {
     let buttonName = "Button" + i;
     client.publish(buttonTriggerDiscoveryTopic(deviceID, buttonName), "");
@@ -252,9 +252,9 @@ const connect = async () => {
   const host = settings.host as string;
   const user = settings.user as string;
   const password = settings.password as string;
-  const HADiscovery = settings.HADiscovery as string;
-  assignmentCount = settings.assignmentCount as string;
-  buttonCount = settings.buttonCount as string;
+  const HADiscovery = settings.HADiscovery as boolean;
+  assignmentCount = settings.assignmentCount as number;
+  buttonCount = settings.buttonCount as number;
   deviceID = settings.deviceID as string;
 
   if(!deviceID) deviceID = "midi-mixer";
@@ -262,14 +262,14 @@ const connect = async () => {
   connectionOptions.username = user;
   connectionOptions.password = password;
 
-  for(let i = 0; i < parseInt(assignmentCount, 10); i++)
+  for(let i = 0; i < assignmentCount; i++)
   {
     assignments[i] = new Assignment("Fader" + i, {
       name: "MQTT Fader" + i,
     });
   }
 
-  for(let i = 0; i < parseInt(buttonCount, 10); i++) {
+  for(let i = 0; i < buttonCount; i++) {
 
     buttons[i] = new ButtonType("Button" + i, {
       name: "MQTT Button" + i,
@@ -282,7 +282,7 @@ const connect = async () => {
 
   client.on('connect', function () {
     $MM.setSettingsStatus("status", "Connected")
-    if (!HADiscovery || HADiscovery == "Enabled") PublishHADiscovery(deviceID, parseInt(assignmentCount, 10), parseInt(buttonCount, 10));
+    if (HADiscovery) PublishHADiscovery(deviceID, assignmentCount, buttonCount);
     updateAvailabilityTopic(true);
     clearTimeout(reconnectTimeout);
   });
