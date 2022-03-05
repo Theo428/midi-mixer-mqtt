@@ -24,8 +24,7 @@
     },
     "HADiscovery": {
       "label": "Disable Home Assistant Discovery",
-      "type": "text",
-      "fallback": "Enabled"
+      "type": "toggle"
     },
     "deviceID": {
       "label": "Device ID for The Device (Home Assistant Device ID)",
@@ -34,13 +33,15 @@
     },
     "assignmentCount": {
       "label": "Number of Groups to Create",
-      "type": "text",
-      "required": true
+      "type": "integer",
+      "min": 0,
+      "max": 50
     },
     "buttonCount": {
       "label": "Number of Buttons to create",
-      "type": "text",
-      "required": true
+      "type": "integer",
+      "min": 0,
+      "max": 50
     },
     "status": {
       "label": "Status",
