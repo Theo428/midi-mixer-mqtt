@@ -23,7 +23,7 @@ The username of the MQTT broker that you want to use. (If there is no authentica
 #### Broker Password
 The password for the MQTT broker that you want to use. (If there is no authentication presumably you can leave this blank but I haven't tested it yet.)
 
-#### Diable Home Assistant Discovery
+#### Disable Home Assistant Discovery
 Enabling this will stop the plugin from sending out the Home Assistant auto-discovery config if you would prefer to [maunally confiure](#mqtt-topics) it or are not using home assistant.
 
 #### Device ID
