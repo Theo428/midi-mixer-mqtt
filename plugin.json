@@ -23,7 +23,7 @@
       "type": "password"
     },
     "HADiscovery": {
-      "label": "Disable Home Assistant Discovery",
+      "label": "Enable Home Assistant Discovery",
       "type": "toggle"
     },
     "deviceID": {
