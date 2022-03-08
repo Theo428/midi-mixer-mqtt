@@ -23,8 +23,8 @@ The username of the MQTT broker that you want to use. (If there is no authentica
 #### Broker Password
 The password for the MQTT broker that you want to use. (If there is no authentication presumably you can leave this blank but I haven't tested it yet.)
 
-#### Disable Home Assistant Discovery
-Enabling this will stop the plugin from sending out the Home Assistant auto-discovery config if you would prefer to [maunally confiure](#mqtt-topics) it or are not using home assistant.
+#### Enable Home Assistant Discovery
+Enabling this will allow the plugin to send out the Home Assistant auto-discovery config. If you would prefer to maunally confiure it or are not using home assistant disable this option.
 
 #### Device ID
 This is a unique identifier that will be used to idetify different devices if there are multiple on the network. (defaults to `midi-mixer` if left blank)
