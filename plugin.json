@@ -27,7 +27,7 @@
       "type": "toggle"
     },
     "deviceID": {
-      "label": "Device ID for The Device (Home Assistant Device ID)",
+      "label": "Device ID(Home Assistant Device ID)",
       "required": true,
       "type": "text"
     },
