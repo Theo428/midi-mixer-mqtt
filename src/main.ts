@@ -116,6 +116,7 @@ function PublishHADiscovery(deviceID:string, assignmentCount:number, buttonCount
 
     assignments[i].on("volumeChanged", (level: number) => {
       client.publish(stateTopic(deviceID, faderName), (level * 255).toString());
+      assignments[i].volume = level;
     });
 
     assignments[i].on("mutePressed", () => {
