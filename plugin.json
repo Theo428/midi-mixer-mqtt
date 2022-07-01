@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/midi-mixer-plugin/plugin.schema.json",
   "id": "com.theo.midi-mixer.mqtt",
-  "name": "MQTT Plugin",
+  "name": "MQTT",
   "type": "node",
   "version": "1.2.1",
   "author": "Theo",
